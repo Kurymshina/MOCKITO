@@ -66,14 +66,14 @@ class MovieManagerTest {
         manager.addMovie("Игры Разума");
         manager.addMovie("Inspections");
 
-        String[] actual = manager.findLast(5);
+        String[] actual = manager.findLast();
         String[] expected = {"Inspections", "Игры Разума", "Green mile", "Любовь и голуби", "Властелин колец"};
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldFindLastSevenMovies() {
-        MovieManager manager = new MovieManager();
+        MovieManager manager = new MovieManager(7);
 
         manager.addMovie("Властелин колец");
         manager.addMovie("Любовь и голуби");
@@ -83,32 +83,32 @@ class MovieManagerTest {
         manager.addMovie("The change");
         manager.addMovie("LOST");
 
-        String[] actual = manager.findLast(7);
+        String[] actual = manager.findLast();
         String[] expected = {"LOST", "The change", "Inspections", "Игры Разума", "Green mile", "Любовь и голуби", "Властелин колец"};
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldFindLastThreeMovies() {
-        MovieManager manager = new MovieManager();
+        MovieManager manager = new MovieManager(3);
 
         manager.addMovie("Властелин колец");
         manager.addMovie("Любовь и голуби");
         manager.addMovie("Green mile");
 
-        String[] actual = manager.findLast(3);
+        String[] actual = manager.findLast();
         String[] expected = {"Green mile", "Любовь и голуби", "Властелин колец"};
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldFindLastIfNull() {
-        MovieManager manager = new MovieManager();
+        MovieManager manager = new MovieManager(3);
 
         manager.addMovie("Любовь и голуби");
         manager.addMovie("Green mile");
 
-        String[] actual = manager.findLast(3);
+        String[] actual = manager.findLast();
         String[] expected = {"Green mile", "Любовь и голуби"};
         Assertions.assertArrayEquals(expected, actual);
     }
