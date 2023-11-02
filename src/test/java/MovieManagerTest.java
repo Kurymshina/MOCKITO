@@ -72,7 +72,51 @@ class MovieManagerTest {
     }
 
     @Test
-    public void shouldFindLastSevenMovies() {
+    public void shouldFindLastWhenMoreThenTheLimit() {
+        MovieManager manager = new MovieManager();
+
+        manager.addMovie("Властелин колец");
+        manager.addMovie("Любовь и голуби");
+        manager.addMovie("Green mile");
+        manager.addMovie("Игры Разума");
+        manager.addMovie("Inspections");
+        manager.addMovie("The change");
+        manager.addMovie("LOST");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"LOST", "The change", "Inspections", "Игры Разума", "Green mile"};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindWhenEqualThenTheLimit() {
+        MovieManager manager = new MovieManager();
+
+        manager.addMovie("Властелин колец");
+        manager.addMovie("Любовь и голуби");
+        manager.addMovie("Green mile");
+        manager.addMovie("The change");
+        manager.addMovie("LOST");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"LOST", "The change", "Green mile", "Любовь и голуби", "Властелин колец"};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindWhenLessThenTheLimit() {
+        MovieManager manager = new MovieManager();
+
+        manager.addMovie("Любовь и голуби");
+        manager.addMovie("Green mile");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"Green mile", "Любовь и голуби"};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindSettingLimit() {
         MovieManager manager = new MovieManager(7);
 
         manager.addMovie("Властелин колец");
@@ -85,31 +129,6 @@ class MovieManagerTest {
 
         String[] actual = manager.findLast();
         String[] expected = {"LOST", "The change", "Inspections", "Игры Разума", "Green mile", "Любовь и голуби", "Властелин колец"};
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLastThreeMovies() {
-        MovieManager manager = new MovieManager(3);
-
-        manager.addMovie("Властелин колец");
-        manager.addMovie("Любовь и голуби");
-        manager.addMovie("Green mile");
-
-        String[] actual = manager.findLast();
-        String[] expected = {"Green mile", "Любовь и голуби", "Властелин колец"};
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLastIfNull() {
-        MovieManager manager = new MovieManager(3);
-
-        manager.addMovie("Любовь и голуби");
-        manager.addMovie("Green mile");
-
-        String[] actual = manager.findLast();
-        String[] expected = {"Green mile", "Любовь и голуби"};
         Assertions.assertArrayEquals(expected, actual);
     }
 }
